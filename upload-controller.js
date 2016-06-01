@@ -10,8 +10,7 @@ var serviceConsultant = require('../Models/Consultant-Model.js');
 //
 //get un consultant by id
 exports.getConsultant = function(id, callback) {
-    //console.log(id);
-    //var id = req.params.id;
+    
     serviceConsultant.ConsultantModel.findById(id, function(err, consultant){
 		if(err) {
 			console.log(err);
@@ -58,11 +57,7 @@ exports.uploadFile2 = function (localPath, filePath, csvFileName, callback){
    var data1=csv.csvtojson(csvFileName); //csvtojson is function that accepts csv filenames and returns JSON object
    //save data in mongo
    saveInMongo(data1);
-    //test contenu via log
-/*for (var i=0; i< data1.length; i++){
-	console.log('tester mon document ' +i);//tester mon premier document
-	console.log(data1[i]);//where key is the from json key-value format
-}*/
+ 
 console.log('localle file cheikh cest la :'+localPath);
 };
 
