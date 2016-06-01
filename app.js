@@ -7,12 +7,13 @@ var port= 8080;
 var destinationFile = 'files';
 
 //Mon module perso
-var serviceConsultant = require('./Models/Consultant-Model.js')
+var Model = require('./Models/Consultant-Model.js')
+var ConsultantController = require('./controllers/upload-controller.js')
 
 app.use(express.bodyParser());
 
 /*****API****/
-
+Model.connect();
 //Affichage index
 app.get('/', function(req, res){
 	//res.render('index');
@@ -23,17 +24,21 @@ app.get('/', function(req, res){
 app.post('/upload', function(req, res){
 	var csvFileName=req.files.myfile.name;
 	var pathFile = __dirname + '/files/'+req.files.myfile.name;
-	serviceConsultant.uploadFile2(req.files.myfile.path, pathFile, csvFileName, res);
-	//console.log(__dirname + '/files/'+req.files.myfile.name);
+	var localPath = req.files.myfile.path;
+	//req.files.myfile.path
+	ConsultantController.uploadFile2(localPath, pathFile, csvFileName, res);
+	console.log(localPath);
+	console.log(pathFile);
+	console.log(csvFileName);
 }); 
 
 //Afficher la liste des consultants 
-app.get('/AfficheConsultants', function (req, res){serviceConsultant.getAllConsultants(req, res)});
+app.get('/AfficheConsultants', function (req, res){ConsultantController.getAllConsultants(req, res)});
 //Afficher un consultant
 app.get('/AfficheConsultants/:id', function(req, res) {
 	//var id = req.params.id;
 	//console.log(req.params.id);
-	serviceConsultant.getConsultant(req.params.id, res);
+	ConsultantController.getConsultant(req.params.id, res);
 });
 
 
