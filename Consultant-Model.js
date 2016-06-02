@@ -5,7 +5,7 @@ var mongoose = require('mongoose'),
     urlDB = 'mongodb://localhost/myapp',
     fs = require('fs'),
     http = require('http');
-//var csv=require('csv2json-convertor');//importing csv2json-
+var ObjectId = Schema.ObjectId;
 
 //connexion   
 exports.connect = function() {
@@ -20,17 +20,15 @@ exports.connect = function() {
 //connect();
 //
 // Mes Schemas
-//creation de schema d'enregistrement des consultants
-var consultantSchema = mongoose.Schema({
-	/*Prenom : { type: String },
+
+//creation de schema d'enregistrement des consultants a reconfigurer 
+var consultantSchema = new mongoose.Schema({
+	_id : {type: Number, required:true },
+	Prenom : { type: String },
 	Nom : { type: String },
-	Competences : [{ nom: String, niveau: Number }],
-	Projets : [{ ProjectName:String , Debut:Date, Fin:Date ,Competences:[{ nom: String, niveau: Number }] }]*/
-    Prenom : { type: String },
-	Nom : { type: String },
-	Competences : { type: String },
-	Projet : { type: String }
+	Competences : [],
+	Projets : []
 });
 
-//creation de mon model pour les consultants(ma classe)
 exports.ConsultantModel = mongoose.model('Consultant',consultantSchema);
+
