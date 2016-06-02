@@ -27,17 +27,12 @@ app.post('/upload', function(req, res){
 	var localPath = req.files.myfile.path;
 	//req.files.myfile.path
 	ConsultantController.uploadFile2(localPath, pathFile, csvFileName, res);
-	console.log(localPath);
-	console.log(pathFile);
-	console.log(csvFileName);
 }); 
 
 //Afficher la liste des consultants 
 app.get('/AfficheConsultants', function (req, res){ConsultantController.getAllConsultants(req, res)});
 //Afficher un consultant
 app.get('/AfficheConsultants/:id', function(req, res) {
-	//var id = req.params.id;
-	//console.log(req.params.id);
 	ConsultantController.getConsultant(req.params.id, res);
 });
 
