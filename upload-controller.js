@@ -71,29 +71,13 @@ console.log('localle file cheikh cest la :'+localPath);
 
 
 
-//methode pour sauvegarder dans mongodb
+//methode pour sauvegarder dans mongodb a optimiser after 
 var saveInMongo = function (data){ 
 	//Loop to save
 	
     for (var i=0; i< data.length; i++){
-		
-		
-		//var id = mongoose.Types.ObjectId(data[i].EmpId);
-		//console.log(id);
-		var c = new serviceConsultant.ConsultantModel({
-		
-		_id :  data[i].EmpId,
-		Prenom : data[i].Prenom,
-		Nom : data[i].Nom,
-		//Competences :[ data[i].Competences],
-		//Projet :[data[i].Projet]
-	});
-	
-		
-	//test si consultant exist
-	findConsultant(data, i);
-
-  }
+		findConsultant(data, i);
+	}
     
 }
 
@@ -121,7 +105,20 @@ var findConsultant = function(data,j){
 			if(err) {console.log(err);throw err;}
 			console.log('saved!!!! yeah');
 			});
-		} else{console.log('yes, consultant existe donc save like update'); Trouve = 2; }
+		} else{
+			console.log('yes, consultant existe donc save like update');
+		 	c.update({
+		
+				//_id :  data[j].EmpId,
+				Prenom : data[j].Prenom,
+				Nom : data[j].Nom,
+				Competences: [data[j].Competences],
+				Projets : [data[j].Projet]
+				},function (err) {
+					if(err) {console.log(err);throw err;}
+					console.log('saved!!!! yeah');
+			}); 
+		}
 	});
 	
 }
