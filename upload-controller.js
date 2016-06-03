@@ -65,8 +65,7 @@ exports.uploadFile2 = function (localPath, filePath, csvFileName, callback){
    var data1=csv.csvtojson(csvFileName); //csvtojson is function that accepts csv filenames and returns JSON object
    //save data in mongo
    saveInMongo(data1);
-   
-console.log('localle file cheikh cest la :'+localPath);
+  
 };
 
 
